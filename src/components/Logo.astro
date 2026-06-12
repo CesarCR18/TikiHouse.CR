@@ -43,122 +43,125 @@ const hasPngLogo = fs.existsSync(logoPngPath);
         }}
       >
         <svg
-  viewBox="0 0 200 200"
-  class="w-full h-full drop-shadow-[0_4px_16px_rgba(45,212,126,0.35)]"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <defs>
-    <linearGradient id="neon-green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2DD47E" />
-      <stop offset="100%" stop-color="#A7F3D0" />
-    </linearGradient>
+          viewBox="0 0 200 200"
+          class="w-full h-full drop-shadow-[0_4px_12px_rgba(45,212,126,0.25)]"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <!-- Premium Gradients -->
+            <linearGradient id="tiki-palm-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2DD47E" />
+              <stop offset="100%" stop-color="#FACC15" />
+            </linearGradient>
+            
+            <linearGradient id="tiki-orange-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#F97316" />
+              <stop offset="100%" stop-color="#FACC15" />
+            </linearGradient>
 
-    <linearGradient id="neon-orange-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F97316" />
-      <stop offset="100%" stop-color="#FACC15" />
-    </linearGradient>
+            <radialGradient id="tiki-glow-radial" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#2DD47E" stop-opacity="0.3" />
+              <stop offset="100%" stop-color="#050807" stop-opacity="0" />
+            </radialGradient>
+          </defs>
 
-    <linearGradient id="neon-pink-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#EC4899" />
-      <stop offset="100%" stop-color="#FACC15" />
-    </linearGradient>
+          <!-- Ambient Backlight -->
+          <circle cx="100" cy="100" r="80" fill="url(#tiki-glow-radial)" />
 
-    <radialGradient id="happy-tiki-glow" cx="50%" cy="50%" r="60%">
-      <stop offset="0%" stop-color="#2DD47E" stop-opacity="0.35" />
-      <stop offset="70%" stop-color="#F97316" stop-opacity="0.12" />
-      <stop offset="100%" stop-color="#050807" stop-opacity="0" />
-    </radialGradient>
-  </defs>
+          <!-- Background Palm Leaves (Fanning Out) -->
+          <g opacity="0.85">
+            {/* Top Leaf */}
+            <path d="M 100 100 Q 100 35 90 20 Q 110 35 100 100" fill="url(#tiki-palm-grad)" />
+            {/* Left Top Leaf */}
+            <path d="M 100 100 Q 55 55 35 75 Q 65 85 100 100" fill="url(#tiki-palm-grad)" />
+            {/* Right Top Leaf */}
+            <path d="M 100 100 Q 145 55 165 75 Q 135 85 100 100" fill="url(#tiki-palm-grad)" />
+            {/* Left Low Leaf */}
+            <path d="M 100 100 Q 40 105 20 125 Q 50 120 100 100" fill="url(#tiki-palm-grad)" />
+            {/* Right Low Leaf */}
+            <path d="M 100 100 Q 160 105 180 125 Q 150 120 100 100" fill="url(#tiki-palm-grad)" />
+          </g>
 
-  <!-- Glow -->
-  <circle cx="100" cy="100" r="88" fill="url(#happy-tiki-glow)" />
+          <!-- Diagonal Antorchas (Tiki Torches) Behind Mask -->
+          <g>
+            {/* Left Torch Pole */}
+            <line x1="45" y1="180" x2="80" y2="105" stroke="#123D2C" stroke-width="6" stroke-linecap="round" />
+            <line x1="45" y1="180" x2="80" y2="105" stroke="#F97316" stroke-width="2" stroke-dasharray="2 4" stroke-linecap="round" />
+            {/* Left Torch Cup */}
+            <path d="M 72 110 L 88 100 L 76 90 Z" fill="#0B1510" stroke="#2DD47E" stroke-width="2" />
+            {/* Left Torch Flame */}
+            <path d="M 80 95 Q 65 75 80 50 Q 95 75 80 95 Z" fill="url(#tiki-orange-grad)" filter="drop-shadow(0 0 6px #F97316)" />
 
-  <!-- Neon feathers / tropical crown -->
-  <g opacity="0.95">
-    <path d="M100 60 C90 35 94 20 100 10 C106 20 110 35 100 60Z" fill="url(#neon-orange-grad)" />
-    <path d="M82 68 C58 42 55 28 60 16 C72 24 82 42 82 68Z" fill="url(#neon-green-grad)" />
-    <path d="M118 68 C142 42 145 28 140 16 C128 24 118 42 118 68Z" fill="url(#neon-green-grad)" />
-    <path d="M67 82 C38 65 28 52 28 38 C45 42 62 58 67 82Z" fill="url(#neon-pink-grad)" />
-    <path d="M133 82 C162 65 172 52 172 38 C155 42 138 58 133 82Z" fill="url(#neon-pink-grad)" />
-  </g>
+            {/* Right Torch Pole */}
+            <line x1="155" y1="180" x2="120" y2="105" stroke="#123D2C" stroke-width="6" stroke-linecap="round" />
+            <line x1="155" y1="180" x2="120" y2="105" stroke="#F97316" stroke-width="2" stroke-dasharray="2 4" stroke-linecap="round" />
+            {/* Right Torch Cup */}
+            <path d="M 128 110 L 112 100 L 124 90 Z" fill="#0B1510" stroke="#2DD47E" stroke-width="2" />
+            {/* Right Torch Flame */}
+            <path d="M 120 95 Q 105 75 120 50 Q 135 75 120 95 Z" fill="url(#tiki-orange-grad)" filter="drop-shadow(0 0 6px #F97316)" />
+          </g>
 
-  <!-- Side neon leaves -->
-  <g opacity="0.75">
-    <path d="M66 118 C35 108 20 95 14 78 C40 78 58 92 66 118Z" fill="url(#neon-green-grad)" />
-    <path d="M134 118 C165 108 180 95 186 78 C160 78 142 92 134 118Z" fill="url(#neon-green-grad)" />
-  </g>
+          <!-- Main Polynesian Tiki Mask -->
+          <g id="tiki-mask">
+            {/* Mask Base Shield */}
+            <path 
+              d="M 70 70 C 70 70 65 145 100 165 C 135 145 130 70 130 70 Z" 
+              fill="#050807" 
+              stroke="url(#tiki-palm-grad)" 
+              stroke-width="5" 
+              stroke-linejoin="round"
+            />
 
-  <!-- Mask base -->
-  <g id="happy-tiki-mask">
-    <path
-      d="M62 74 
-         C62 58 78 50 100 50 
-         C122 50 138 58 138 74 
-         C140 105 134 145 100 170 
-         C66 145 60 105 62 74Z"
-      fill="#050807"
-      stroke="url(#neon-green-grad)"
-      stroke-width="5"
-      stroke-linejoin="round"
-    />
+            {/* Forehead Carvings (Tiki crown style) */}
+            <path d="M 80 82 L 100 92 L 120 82" fill="none" stroke="url(#tiki-palm-grad)" stroke-width="3" stroke-linecap="round" />
+            <path d="M 80 90 L 100 100 L 120 90" fill="none" stroke="url(#tiki-orange-grad)" stroke-width="3" stroke-linecap="round" />
 
-    <!-- Wood/neon carved panels -->
-    <path d="M76 72 L100 62 L124 72" fill="none" stroke="url(#neon-orange-grad)" stroke-width="4" stroke-linecap="round" />
-    <path d="M78 84 L100 76 L122 84" fill="none" stroke="#2DD47E" stroke-width="3" stroke-linecap="round" />
+            {/* Angry Brows */}
+            <path d="M 74 98 L 94 106" stroke="#F97316" stroke-width="4.5" stroke-linecap="round" />
+            <path d="M 126 98 L 106 106" stroke="#F97316" stroke-width="4.5" stroke-linecap="round" />
 
-    <!-- Happy eyebrows -->
-    <path d="M75 102 Q86 92 96 101" fill="none" stroke="#FACC15" stroke-width="5" stroke-linecap="round" />
-    <path d="M104 101 Q114 92 125 102" fill="none" stroke="#FACC15" stroke-width="5" stroke-linecap="round" />
+            {/* Glowing Eyes */}
+            <ellipse cx="85" cy="110" rx="8" ry="5" fill="#2DD47E" filter="drop-shadow(0 0 4px #2DD47E)" />
+            <ellipse cx="115" cy="110" rx="8" ry="5" fill="#2DD47E" filter="drop-shadow(0 0 4px #2DD47E)" />
 
-    <!-- Happy glowing eyes -->
-    <path d="M78 112 Q86 120 94 112" fill="none" stroke="#2DD47E" stroke-width="5" stroke-linecap="round" filter="drop-shadow(0 0 5px #2DD47E)" />
-    <path d="M106 112 Q114 120 122 112" fill="none" stroke="#2DD47E" stroke-width="5" stroke-linecap="round" filter="drop-shadow(0 0 5px #2DD47E)" />
+            {/* Nose */}
+            <path 
+              d="M 96 108 H 104 L 104 128 H 110 L 100 138 L 90 128 H 96 Z" 
+              fill="url(#tiki-orange-grad)" 
+              stroke="#050807" 
+              stroke-width="1.5" 
+            />
 
-    <!-- Nose -->
-    <path
-      d="M96 116 H104 L110 132 L100 142 L90 132 Z"
-      fill="url(#neon-orange-grad)"
-      stroke="#050807"
-      stroke-width="2"
-      stroke-linejoin="round"
-    />
+            {/* Grinning Mouth with blocky teeth */}
+            <path 
+              d="M 80 144 Q 100 156 120 144 Q 100 138 80 144 Z" 
+              fill="#050807" 
+              stroke="url(#tiki-palm-grad)" 
+              stroke-width="3.5" 
+              stroke-linejoin="round"
+            />
+            {/* Teeth Grid */}
+            <path d="M 88 144 V 148 M 94 145 V 149 M 100 146 V 150 M 106 145 V 149 M 112 144 V 148" stroke="#FACC15" stroke-width="2" stroke-linecap="round" />
+          </g>
 
-    <!-- Cheeks -->
-    <circle cx="78" cy="132" r="6" fill="#EC4899" opacity="0.85" filter="drop-shadow(0 0 5px #EC4899)" />
-    <circle cx="122" cy="132" r="6" fill="#EC4899" opacity="0.85" filter="drop-shadow(0 0 5px #EC4899)" />
-
-    <!-- Big happy mouth -->
-    <path
-      d="M78 144 
-         Q100 162 122 144 
-         Q114 156 100 158 
-         Q86 156 78 144Z"
-      fill="#FACC15"
-      stroke="url(#neon-green-grad)"
-      stroke-width="4"
-      stroke-linejoin="round"
-    />
-
-    <!-- Smile inner line -->
-    <path d="M84 145 Q100 155 116 145" fill="none" stroke="#050807" stroke-width="3" stroke-linecap="round" />
-
-    <!-- Tiki side carvings -->
-    <path d="M68 94 L82 88 L72 80" fill="none" stroke="#F97316" stroke-width="3" stroke-linecap="round" />
-    <path d="M132 94 L118 88 L128 80" fill="none" stroke="#F97316" stroke-width="3" stroke-linecap="round" />
-
-    <path d="M72 154 L88 148" stroke="#2DD47E" stroke-width="3" stroke-linecap="round" />
-    <path d="M128 154 L112 148" stroke="#2DD47E" stroke-width="3" stroke-linecap="round" />
-  </g>
-
-  <!-- Small cocktail accent -->
-  <g transform="translate(132, 136) scale(0.75)">
-    <path d="M5 15 C5 45 45 45 45 15 Z" fill="#123D2C" stroke="#2DD47E" stroke-width="3.5" />
-    <path d="M6 16 H44 C42 24 35 28 25 28 C15 28 8 24 6 16Z" fill="url(#neon-orange-grad)" />
-    <line x1="32" y1="20" x2="48" y2="-5" stroke="#FACC15" stroke-width="4" stroke-linecap="round" />
-    <circle cx="12" cy="12" r="8" fill="#2DD47E" stroke="#A7F3D0" stroke-width="1.5" />
-    <path d="M18 10 L8 -15 L30 -10 Z" fill="#EC4899" stroke="#FACC15" stroke-width="1.5" />
-  </g>
-</svg>
+          {/* Tropical Cocktail Accent (Bottom Right overlap) */}
+          <g transform="translate(118, 134) scale(0.9)">
+            {/* Coconut Cup */}
+            <path d="M 5 15 C 5 45 45 45 45 15 Z" fill="#123D2C" stroke="#2DD47E" stroke-width="3.5" />
+            {/* Liquid inside Coconut */}
+            <path d="M 6 16 H 44 C 44 16 40 25 25 25 C 10 25 6 16 6 16 Z" fill="url(#tiki-orange-grad)" />
+            {/* Straw */}
+            <line x1="32" y1="20" x2="48" y2="-5" stroke="#FACC15" stroke-width="4" stroke-linecap="round" />
+            {/* Lime Wheel */}
+            <circle cx="10" cy="12" r="8" fill="#2DD47E" stroke="#A7F3D0" stroke-width="1.5" />
+            <circle cx="10" cy="12" r="5" fill="#123D2C" />
+            <line x1="10" y1="4" x2="10" y2="20" stroke="#2DD47E" stroke-width="1" />
+            <line x1="2" y1="12" x2="18" y2="12" stroke="#2DD47E" stroke-width="1" />
+            {/* Cocktail Umbrella */}
+            <path d="M 18 10 L 8 -15 L 28 -10 Z" fill="#F97316" stroke="#FACC15" stroke-width="1.5" stroke-linejoin="round" />
+            <line x1="18" y1="10" x2="15" y2="0" stroke="#FACC15" stroke-width="2.5" />
+          </g>
+        </svg>
       </div>
 
       {/* Typography portion of Logo */}
