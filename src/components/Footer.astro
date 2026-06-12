@@ -1,4 +1,5 @@
 ---
+import Logo from './Logo.astro';
 const currentYear = new Date().getFullYear();
 ---
 
@@ -11,10 +12,8 @@ const currentYear = new Date().getFullYear();
       
       <!-- Brand Details -->
       <div class="md:col-span-5 space-y-4">
-        <a href="#inicio" class="flex items-center space-x-2 group">
-          <span class="text-2xl md:text-3xl font-extrabold tracking-tighter text-gradient-palm-yellow">
-            TIKI HOUSE BAR
-          </span>
+        <a href="#inicio" class="flex items-center group">
+          <Logo variant="full" width={34} height={34} class="transition-transform duration-300 group-hover:scale-[1.03]" />
         </a>
         <p class="text-sm text-tiki-textSec font-normal max-w-sm leading-relaxed">
           Coctelería para eventos en Costa Rica. Llevamos barras móviles tropicales, bartenders certificados y el mejor ambiente exótico directamente a tu celebración.

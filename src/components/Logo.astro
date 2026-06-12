@@ -1,0 +1,182 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+interface Props {
+  variant?: 'full' | 'icon';
+  class?: string;
+  width?: string | number;
+  height?: string | number;
+}
+
+const {
+  variant = 'full',
+  class: className = '',
+  width,
+  height,
+} = Astro.props;
+
+// Check if logo exists in public folder
+const logoPngPath = path.join(process.cwd(), 'public', 'logo-tiki-house.png');
+const hasPngLogo = fs.existsSync(logoPngPath);
+---
+
+<div class={`inline-flex items-center select-none ${className}`}>
+  {hasPngLogo ? (
+    // Real Logo Image
+    <img
+      src="/logo-tiki-house.png"
+      alt="Tiki House CR Logo"
+      width={width}
+      height={height}
+      class={`object-contain max-h-full ${variant === 'icon' ? 'aspect-square' : ''}`}
+    />
+  ) : (
+    // Fallback Premium SVG Logo
+    <div class="flex items-center space-x-3 md:space-x-4">
+      {/* Icon portion of Logo */}
+      <div 
+        class="relative flex-shrink-0"
+        style={{ 
+          width: width ? `${width}px` : '48px', 
+          height: height ? `${height}px` : '48px' 
+        }}
+      >
+        <svg
+  viewBox="0 0 200 200"
+  class="w-full h-full drop-shadow-[0_4px_16px_rgba(45,212,126,0.35)]"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="neon-green-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2DD47E" />
+      <stop offset="100%" stop-color="#A7F3D0" />
+    </linearGradient>
+
+    <linearGradient id="neon-orange-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F97316" />
+      <stop offset="100%" stop-color="#FACC15" />
+    </linearGradient>
+
+    <linearGradient id="neon-pink-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EC4899" />
+      <stop offset="100%" stop-color="#FACC15" />
+    </linearGradient>
+
+    <radialGradient id="happy-tiki-glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#2DD47E" stop-opacity="0.35" />
+      <stop offset="70%" stop-color="#F97316" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#050807" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Glow -->
+  <circle cx="100" cy="100" r="88" fill="url(#happy-tiki-glow)" />
+
+  <!-- Neon feathers / tropical crown -->
+  <g opacity="0.95">
+    <path d="M100 60 C90 35 94 20 100 10 C106 20 110 35 100 60Z" fill="url(#neon-orange-grad)" />
+    <path d="M82 68 C58 42 55 28 60 16 C72 24 82 42 82 68Z" fill="url(#neon-green-grad)" />
+    <path d="M118 68 C142 42 145 28 140 16 C128 24 118 42 118 68Z" fill="url(#neon-green-grad)" />
+    <path d="M67 82 C38 65 28 52 28 38 C45 42 62 58 67 82Z" fill="url(#neon-pink-grad)" />
+    <path d="M133 82 C162 65 172 52 172 38 C155 42 138 58 133 82Z" fill="url(#neon-pink-grad)" />
+  </g>
+
+  <!-- Side neon leaves -->
+  <g opacity="0.75">
+    <path d="M66 118 C35 108 20 95 14 78 C40 78 58 92 66 118Z" fill="url(#neon-green-grad)" />
+    <path d="M134 118 C165 108 180 95 186 78 C160 78 142 92 134 118Z" fill="url(#neon-green-grad)" />
+  </g>
+
+  <!-- Mask base -->
+  <g id="happy-tiki-mask">
+    <path
+      d="M62 74 
+         C62 58 78 50 100 50 
+         C122 50 138 58 138 74 
+         C140 105 134 145 100 170 
+         C66 145 60 105 62 74Z"
+      fill="#050807"
+      stroke="url(#neon-green-grad)"
+      stroke-width="5"
+      stroke-linejoin="round"
+    />
+
+    <!-- Wood/neon carved panels -->
+    <path d="M76 72 L100 62 L124 72" fill="none" stroke="url(#neon-orange-grad)" stroke-width="4" stroke-linecap="round" />
+    <path d="M78 84 L100 76 L122 84" fill="none" stroke="#2DD47E" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Happy eyebrows -->
+    <path d="M75 102 Q86 92 96 101" fill="none" stroke="#FACC15" stroke-width="5" stroke-linecap="round" />
+    <path d="M104 101 Q114 92 125 102" fill="none" stroke="#FACC15" stroke-width="5" stroke-linecap="round" />
+
+    <!-- Happy glowing eyes -->
+    <path d="M78 112 Q86 120 94 112" fill="none" stroke="#2DD47E" stroke-width="5" stroke-linecap="round" filter="drop-shadow(0 0 5px #2DD47E)" />
+    <path d="M106 112 Q114 120 122 112" fill="none" stroke="#2DD47E" stroke-width="5" stroke-linecap="round" filter="drop-shadow(0 0 5px #2DD47E)" />
+
+    <!-- Nose -->
+    <path
+      d="M96 116 H104 L110 132 L100 142 L90 132 Z"
+      fill="url(#neon-orange-grad)"
+      stroke="#050807"
+      stroke-width="2"
+      stroke-linejoin="round"
+    />
+
+    <!-- Cheeks -->
+    <circle cx="78" cy="132" r="6" fill="#EC4899" opacity="0.85" filter="drop-shadow(0 0 5px #EC4899)" />
+    <circle cx="122" cy="132" r="6" fill="#EC4899" opacity="0.85" filter="drop-shadow(0 0 5px #EC4899)" />
+
+    <!-- Big happy mouth -->
+    <path
+      d="M78 144 
+         Q100 162 122 144 
+         Q114 156 100 158 
+         Q86 156 78 144Z"
+      fill="#FACC15"
+      stroke="url(#neon-green-grad)"
+      stroke-width="4"
+      stroke-linejoin="round"
+    />
+
+    <!-- Smile inner line -->
+    <path d="M84 145 Q100 155 116 145" fill="none" stroke="#050807" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Tiki side carvings -->
+    <path d="M68 94 L82 88 L72 80" fill="none" stroke="#F97316" stroke-width="3" stroke-linecap="round" />
+    <path d="M132 94 L118 88 L128 80" fill="none" stroke="#F97316" stroke-width="3" stroke-linecap="round" />
+
+    <path d="M72 154 L88 148" stroke="#2DD47E" stroke-width="3" stroke-linecap="round" />
+    <path d="M128 154 L112 148" stroke="#2DD47E" stroke-width="3" stroke-linecap="round" />
+  </g>
+
+  <!-- Small cocktail accent -->
+  <g transform="translate(132, 136) scale(0.75)">
+    <path d="M5 15 C5 45 45 45 45 15 Z" fill="#123D2C" stroke="#2DD47E" stroke-width="3.5" />
+    <path d="M6 16 H44 C42 24 35 28 25 28 C15 28 8 24 6 16Z" fill="url(#neon-orange-grad)" />
+    <line x1="32" y1="20" x2="48" y2="-5" stroke="#FACC15" stroke-width="4" stroke-linecap="round" />
+    <circle cx="12" cy="12" r="8" fill="#2DD47E" stroke="#A7F3D0" stroke-width="1.5" />
+    <path d="M18 10 L8 -15 L30 -10 Z" fill="#EC4899" stroke="#FACC15" stroke-width="1.5" />
+  </g>
+</svg>
+      </div>
+
+      {/* Typography portion of Logo */}
+      {variant === 'full' && (
+        <div class="flex flex-col justify-center select-none leading-none">
+          <span class="text-xl md:text-2xl font-black tracking-tight text-white font-display uppercase">
+            Tiki House
+          </span>
+          <div class="flex items-center space-x-1.5 mt-0.5">
+            <span class="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-tiki-palm uppercase">
+              Costa Rica
+            </span>
+            <span class="text-[8px] font-extrabold px-1.5 py-0.5 rounded bg-tiki-forest/60 text-tiki-soft border border-tiki-palm/20 uppercase tracking-widest leading-none">
+              CR
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
+  )}
+</div>
