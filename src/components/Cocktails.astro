@@ -5,20 +5,20 @@ import CocktailCard from './CocktailCard.astro';
 const categories = ['Todos', 'Clásicos', 'Especiales Tiki', 'Autóctonos & Shots'];
 ---
 
-<section id="cocteles" class="py-24 px-4 md:px-8 relative bg-tiki-dark overflow-hidden">
+<section id="cocteles" class="py-24 px-4 md:px-8 relative bg-tiki-bg overflow-hidden">
   <!-- Decorative background mesh -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-tiki-forest/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-tiki-secondary/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
 
   <div class="max-w-7xl mx-auto relative z-10">
     <!-- Header -->
     <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-      <span class="text-xs font-extrabold uppercase tracking-widest text-tiki-palm bg-tiki-forest/30 border border-tiki-palm/20 px-3.5 py-1 rounded-full">
+      <span class="text-xs font-extrabold uppercase tracking-widest text-tiki-primary bg-tiki-secondary/30 border border-tiki-primary/20 px-3.5 py-1 rounded-full">
         Sabores del Trópico
       </span>
-      <h2 class="text-4xl md:text-5xl font-extrabold text-tiki-textMain tracking-tight">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-tiki-text tracking-tight">
         Nuestra Carta de Coctelería
       </h2>
-      <p class="text-base md:text-lg text-tiki-textSec font-normal leading-relaxed">
+      <p class="text-base md:text-lg text-tiki-text-sec font-normal leading-relaxed">
         Bebidas exóticas y refrescantes preparadas al momento por profesionales, utilizando frutas costarricenses de temporada y destilados premium.
       </p>
     </div>
@@ -30,8 +30,8 @@ const categories = ['Todos', 'Clásicos', 'Especiales Tiki', 'Autóctonos & Shot
           data-category={category}
           class={`filter-btn px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide border transition-all duration-300 cursor-pointer ${
             category === 'Todos'
-              ? 'bg-tiki-palm text-tiki-dark border-tiki-palm shadow-[0_0_15px_rgba(45,212,126,0.25)]'
-              : 'bg-tiki-card/85 text-tiki-textSec border-tiki-soft/10 hover:border-tiki-palm/45 hover:text-tiki-palm'
+              ? 'bg-tiki-primary text-tiki-bg border-tiki-primary shadow-[0_0_15px_rgba(0,177,137,0.25)]'
+              : 'bg-tiki-card/85 text-tiki-text-sec border-tiki-primary/10 hover:border-tiki-primary/45 hover:text-tiki-primary'
           }`}
         >
           {category}
@@ -42,7 +42,7 @@ const categories = ['Todos', 'Clásicos', 'Especiales Tiki', 'Autóctonos & Shot
     <!-- Cocktails Grid -->
     <div 
       id="cocktails-grid" 
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-500"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-500"
     >
       {COCKTAILS.map((cocktail) => (
         <div 
@@ -70,11 +70,11 @@ const categories = ['Todos', 'Clásicos', 'Especiales Tiki', 'Autóctonos & Shot
       // 2. Update active button styles
       buttons.forEach((b) => {
         if (b === btn) {
-          b.classList.remove('bg-tiki-card/85', 'text-tiki-textSec', 'border-tiki-soft/10', 'hover:border-tiki-palm/45', 'hover:text-tiki-palm');
-          b.classList.add('bg-tiki-palm', 'text-tiki-dark', 'border-tiki-palm', 'shadow-[0_0_15px_rgba(45,212,126,0.25)]');
+          b.classList.remove('bg-tiki-card/85', 'text-tiki-text-sec', 'border-tiki-primary/10', 'hover:border-tiki-primary/45', 'hover:text-tiki-primary');
+          b.classList.add('bg-tiki-primary', 'text-tiki-bg', 'border-tiki-primary', 'shadow-[0_0_15px_rgba(0,177,137,0.25)]');
         } else {
-          b.classList.add('bg-tiki-card/85', 'text-tiki-textSec', 'border-tiki-soft/10', 'hover:border-tiki-palm/45', 'hover:text-tiki-palm');
-          b.classList.remove('bg-tiki-palm', 'text-tiki-dark', 'border-tiki-palm', 'shadow-[0_0_15px_rgba(45,212,126,0.25)]');
+          b.classList.add('bg-tiki-card/85', 'text-tiki-text-sec', 'border-tiki-primary/10', 'hover:border-tiki-primary/45', 'hover:text-tiki-primary');
+          b.classList.remove('bg-tiki-primary', 'text-tiki-bg', 'border-tiki-primary', 'shadow-[0_0_15px_rgba(0,177,137,0.25)]');
         }
       });
 

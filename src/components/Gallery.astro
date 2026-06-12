@@ -6,7 +6,6 @@ const items = [
     category: 'Barra de Cocteles',
     description: 'Montaje completo de nuestra barra móvil iluminada, lista para recibir a tus invitados.',
     span: 'md:col-span-2 md:row-span-2',
-    gradient: 'from-emerald-950/40 via-tiki-dark/90 to-tiki-dark border-tiki-palm/20'
   },
   {
     id: 'evento-nocturno',
@@ -14,7 +13,6 @@ const items = [
     category: 'Evento Nocturno',
     description: 'Ambiente festivo y sofisticado bajo las luces de la noche costarricense.',
     span: 'md:col-span-1 md:row-span-1',
-    gradient: 'from-blue-950/40 via-tiki-dark/90 to-tiki-dark border-blue-500/20'
   },
   {
     id: 'bebidas-tropicales',
@@ -22,7 +20,6 @@ const items = [
     category: 'Bebidas Tropicales',
     description: 'Servicio continuo de tragos decorados con flores, frutas frescas y sorbetes ecológicos.',
     span: 'md:col-span-1 md:row-span-2',
-    gradient: 'from-orange-950/40 via-tiki-dark/90 to-tiki-dark border-tiki-orange/20'
   },
   {
     id: 'bartender-preparando',
@@ -30,7 +27,6 @@ const items = [
     category: 'Bartender Preparando Tragos',
     description: 'Profesionales de la coctelería ejecutando técnicas de agitado y servido con precisión y estilo.',
     span: 'md:col-span-1 md:row-span-1',
-    gradient: 'from-yellow-950/40 via-tiki-dark/90 to-tiki-dark border-tiki-yellow/20'
   },
   {
     id: 'decoracion-tiki',
@@ -38,22 +34,21 @@ const items = [
     category: 'Decoración Tiki',
     description: 'Tiki mugs artesanales, luces cálidas, y follaje selvático para ambientar tu celebración.',
     span: 'md:col-span-2 md:row-span-1',
-    gradient: 'from-teal-950/40 via-tiki-dark/90 to-tiki-dark border-tiki-soft/20'
   }
 ];
 ---
 
-<section id="galeria" class="py-24 px-4 md:px-8 relative bg-tiki-dark overflow-hidden">
+<section id="galeria" class="py-24 px-4 md:px-8 relative bg-tiki-bg overflow-hidden">
   <div class="max-w-7xl mx-auto relative z-10">
     <!-- Header -->
     <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-      <span class="text-xs font-extrabold uppercase tracking-widest text-tiki-palm bg-tiki-forest/30 border border-tiki-palm/20 px-3.5 py-1 rounded-full inline-block">
+      <span class="text-xs font-extrabold uppercase tracking-widest text-tiki-primary bg-tiki-secondary/30 border border-tiki-primary/20 px-3.5 py-1 rounded-full inline-block">
         Visualiza tu Evento
       </span>
-      <h2 class="text-4xl md:text-5xl font-extrabold text-tiki-textMain tracking-tight">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-tiki-text tracking-tight">
         Galería de Experiencias
       </h2>
-      <p class="text-base md:text-lg text-tiki-textSec font-normal leading-relaxed">
+      <p class="text-base md:text-lg text-tiki-text-sec font-normal leading-relaxed">
         Un vistazo a la atmósfera, el servicio y los detalles exóticos que llevamos a cada una de nuestras celebraciones.
       </p>
     </div>
@@ -61,65 +56,46 @@ const items = [
     <!-- Bento Grid Layout -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[200px] md:auto-rows-[220px]">
       {items.map((item) => (
-        <div class={`group relative rounded-3xl p-6 md:p-8 bg-gradient-to-br ${item.gradient} border flex flex-col justify-between overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_10px_35px_rgba(5,8,7,0.9)] ${item.span}`}>
+        <div class={`group relative rounded-3xl p-6 md:p-8 bg-tiki-card border border-tiki-primary/15 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_10px_35px_rgba(0,177,137,0.1)] hover:border-tiki-primary/35 ${item.span}`}>
           
-          <!-- Glowing background accent -->
-          <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/2 rounded-full blur-2xl group-hover:bg-tiki-palm/5 transition-all duration-500"></div>
+          <!--
+            ╔══════════════════════════════════════════════════════════════╗
+            ║  IMAGEN DE GALERÍA                                          ║
+            ║  Subir imagen a: /public/images/gallery/{item.id}.jpg       ║
+            ║  Tamaño recomendado: 800x600px mínimo                       ║
+            ║  Los items grandes (col-span-2) usar 1200x800px             ║
+            ╚══════════════════════════════════════════════════════════════╝
+          -->
+          <!-- Background Image -->
+          <img 
+            src={`/images/gallery/${item.id}.jpg`}
+            alt={item.title}
+            class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500"
+            loading="lazy"
+          />
 
-          <!-- Top Section (Category & Icon) -->
+          <!-- Overlay gradiente oscuro -->
+          <div class="absolute inset-0 bg-gradient-to-t from-tiki-bg via-tiki-bg/70 to-transparent"></div>
+
+          <!-- Top Section (Category) -->
           <div class="flex items-start justify-between relative z-10">
-            <span class="text-[10px] font-bold tracking-widest uppercase text-tiki-palm bg-tiki-dark/65 border border-tiki-palm/20 px-3 py-1 rounded-full">
+            <span class="text-[10px] font-bold tracking-widest uppercase text-tiki-primary bg-tiki-bg/65 border border-tiki-primary/20 px-3 py-1 rounded-full">
               {item.category}
             </span>
-            <div class="p-2.5 rounded-xl bg-tiki-dark/60 border border-white/5 transition-transform duration-300 group-hover:scale-110">
-              {item.id === 'barra-cocteles' && (
-                <svg class="w-10 h-10 md:w-12 md:h-12 text-tiki-palm/40 group-hover:text-tiki-palm transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M2 22h20" />
-                  <path d="M5 22V10a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v12" />
-                  <path d="M9 7V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v3" />
-                  <circle cx="12" cy="13" r="2" fill="currentColor" class="opacity-30" />
-                </svg>
-              )}
-              {item.id === 'evento-nocturno' && (
-                <svg class="w-10 h-10 text-blue-400/40 group-hover:text-blue-400 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-                  <circle cx="12" cy="12" r="4" fill="currentColor" class="opacity-30" />
-                </svg>
-              )}
-              {item.id === 'bebidas-tropicales' && (
-                <svg class="w-10 h-10 text-tiki-orange/40 group-hover:text-tiki-orange transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
-                  <path d="M12 7v5l3 3" />
-                  <path d="M6 12h12" stroke-dasharray="1 1" />
-                </svg>
-              )}
-              {item.id === 'bartender-preparando' && (
-                <svg class="w-10 h-10 text-tiki-yellow/40 group-hover:text-tiki-yellow transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M6 3h12l-1 9H7L6 3Z" />
-                  <path d="M12 12v6M9 18h6M8 21h8" />
-                </svg>
-              )}
-              {item.id === 'decoracion-tiki' && (
-                <svg class="w-10 h-10 text-tiki-soft/40 group-hover:text-tiki-soft transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
-                  <circle cx="12" cy="11" r="3" fill="currentColor" class="opacity-30" />
-                </svg>
-              )}
-            </div>
           </div>
 
           <!-- Bottom Section (Title & Description) -->
           <div class="relative z-10">
-            <h3 class="text-xl md:text-2xl font-bold text-tiki-textMain mb-1.5 group-hover:text-tiki-palm transition-colors duration-300">
+            <h3 class="text-xl md:text-2xl font-bold text-tiki-text mb-1.5 group-hover:text-tiki-primary transition-colors duration-300">
               {item.title}
             </h3>
-            <p class="text-xs md:text-sm text-tiki-textSec font-normal leading-relaxed max-w-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+            <p class="text-xs md:text-sm text-tiki-text-sec font-normal leading-relaxed max-w-xl opacity-80 group-hover:opacity-100 transition-opacity duration-300">
               {item.description}
             </p>
           </div>
 
           <!-- Glassmorphic neon-like border glow -->
-          <div class="absolute inset-0 border border-tiki-palm/0 group-hover:border-tiki-palm/20 rounded-3xl transition-colors duration-500 pointer-events-none"></div>
+          <div class="absolute inset-0 border border-tiki-primary/0 group-hover:border-tiki-primary/20 rounded-3xl transition-colors duration-500 pointer-events-none"></div>
         </div>
       ))}
     </div>

@@ -1,49 +1,70 @@
 @import "tailwindcss";
 
 @theme {
-  --color-tiki-dark: #050807;
-  --color-tiki-card: #0B1510;
-  --color-tiki-forest: #123D2C;
-  --color-tiki-palm: #2DD47E;
-  --color-tiki-soft: #A7F3D0;
-  --color-tiki-yellow: #FACC15;
-  --color-tiki-orange: #F97316;
-  --color-tiki-text-main: #F8FAFC;
-  --color-tiki-text-sec: #CBD5E1;
+  /* ═══════════════════════════════════════════════════════
+     TIKI HOUSE — Paleta Oficial (Libro de Marca)
+     No usar colores fuera de esta paleta.
+     ═══════════════════════════════════════════════════════ */
 
+  /* — Fondos — */
+  --color-tiki-bg: #050807;
+  --color-tiki-bg-alt: #0B1510;
+  --color-tiki-card: #101A16;
+  --color-tiki-section: #12211B;
+
+  /* — Colores de Marca — */
+  --color-tiki-primary: #00B189;
+  --color-tiki-primary-hover: #00C99A;
+  --color-tiki-secondary: #235B4E;
+  --color-tiki-accent: #F0592A;
+  --color-tiki-gold: #F5A800;
+
+  /* — Texto — */
+  --color-tiki-text: #F8FAFC;
+  --color-tiki-text-sec: #CBD5E1;
+  --color-tiki-text-muted: #94A3B8;
+
+  /* — Tipografía — */
   --font-sans: "Outfit", sans-serif;
   --font-display: "Syne", sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #050807;
-  color: #F8FAFC;
+  background-color: var(--color-tiki-bg);
+  color: var(--color-tiki-text);
 }
 
-/* Custom styles and utilities for nice visuals */
+/* ═══ Glassmorphism ═══ */
 .glassmorphism {
-  background: rgba(11, 21, 16, 0.7);
+  background: rgba(16, 26, 22, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(45, 212, 126, 0.1);
+  border: 1px solid rgba(0, 177, 137, 0.1);
 }
 
 .glassmorphism-light {
-  background: rgba(11, 21, 16, 0.4);
+  background: rgba(16, 26, 22, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid rgba(248, 250, 252, 0.05);
 }
 
-.text-gradient-palm-yellow {
-  background: linear-gradient(135deg, #2DD47E 0%, #FACC15 100%);
+/* ═══ Gradientes de Texto (Colores Oficiales) ═══ */
+.text-gradient-primary {
+  background: linear-gradient(135deg, #00B189 0%, #F5A800 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-orange-yellow {
-  background: linear-gradient(135deg, #F97316 0%, #FACC15 100%);
+.text-gradient-accent {
+  background: linear-gradient(135deg, #F0592A 0%, #F5A800 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-hero {
+  background: linear-gradient(135deg, #235B4E 0%, #00B189 50%, #F0592A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

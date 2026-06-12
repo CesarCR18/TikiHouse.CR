@@ -1,7 +1,4 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
-
 interface Props {
   variant?: 'full' | 'icon';
   class?: string;
@@ -15,171 +12,51 @@ const {
   width,
   height,
 } = Astro.props;
-
-// Check if logo exists in public folder
-const logoPngPath = path.join(process.cwd(), 'public', 'logo-tiki-house.png');
-const hasPngLogo = fs.existsSync(logoPngPath);
 ---
 
 <div class={`inline-flex items-center select-none ${className}`}>
-  {hasPngLogo ? (
-    // Real Logo Image
-    <img
-      src="/logo-tiki-house.png"
-      alt="Tiki House CR Logo"
-      width={width}
-      height={height}
-      class={`object-contain max-h-full ${variant === 'icon' ? 'aspect-square' : ''}`}
-    />
-  ) : (
-    // Fallback Premium SVG Logo
-    <div class="flex items-center space-x-3 md:space-x-4">
-      {/* Icon portion of Logo */}
-      <div 
-        class="relative flex-shrink-0"
-        style={{ 
-          width: width ? `${width}px` : '48px', 
-          height: height ? `${height}px` : '48px' 
-        }}
-      >
-        <svg
-          viewBox="0 0 200 200"
-          class="w-full h-full drop-shadow-[0_4px_12px_rgba(45,212,126,0.25)]"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <!-- Premium Gradients -->
-            <linearGradient id="tiki-palm-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#2DD47E" />
-              <stop offset="100%" stop-color="#FACC15" />
-            </linearGradient>
-            
-            <linearGradient id="tiki-orange-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#F97316" />
-              <stop offset="100%" stop-color="#FACC15" />
-            </linearGradient>
-
-            <radialGradient id="tiki-glow-radial" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#2DD47E" stop-opacity="0.3" />
-              <stop offset="100%" stop-color="#050807" stop-opacity="0" />
-            </radialGradient>
-          </defs>
-
-          <!-- Ambient Backlight -->
-          <circle cx="100" cy="100" r="80" fill="url(#tiki-glow-radial)" />
-
-          <!-- Background Palm Leaves (Fanning Out) -->
-          <g opacity="0.85">
-            {/* Top Leaf */}
-            <path d="M 100 100 Q 100 35 90 20 Q 110 35 100 100" fill="url(#tiki-palm-grad)" />
-            {/* Left Top Leaf */}
-            <path d="M 100 100 Q 55 55 35 75 Q 65 85 100 100" fill="url(#tiki-palm-grad)" />
-            {/* Right Top Leaf */}
-            <path d="M 100 100 Q 145 55 165 75 Q 135 85 100 100" fill="url(#tiki-palm-grad)" />
-            {/* Left Low Leaf */}
-            <path d="M 100 100 Q 40 105 20 125 Q 50 120 100 100" fill="url(#tiki-palm-grad)" />
-            {/* Right Low Leaf */}
-            <path d="M 100 100 Q 160 105 180 125 Q 150 120 100 100" fill="url(#tiki-palm-grad)" />
-          </g>
-
-          <!-- Diagonal Antorchas (Tiki Torches) Behind Mask -->
-          <g>
-            {/* Left Torch Pole */}
-            <line x1="45" y1="180" x2="80" y2="105" stroke="#123D2C" stroke-width="6" stroke-linecap="round" />
-            <line x1="45" y1="180" x2="80" y2="105" stroke="#F97316" stroke-width="2" stroke-dasharray="2 4" stroke-linecap="round" />
-            {/* Left Torch Cup */}
-            <path d="M 72 110 L 88 100 L 76 90 Z" fill="#0B1510" stroke="#2DD47E" stroke-width="2" />
-            {/* Left Torch Flame */}
-            <path d="M 80 95 Q 65 75 80 50 Q 95 75 80 95 Z" fill="url(#tiki-orange-grad)" filter="drop-shadow(0 0 6px #F97316)" />
-
-            {/* Right Torch Pole */}
-            <line x1="155" y1="180" x2="120" y2="105" stroke="#123D2C" stroke-width="6" stroke-linecap="round" />
-            <line x1="155" y1="180" x2="120" y2="105" stroke="#F97316" stroke-width="2" stroke-dasharray="2 4" stroke-linecap="round" />
-            {/* Right Torch Cup */}
-            <path d="M 128 110 L 112 100 L 124 90 Z" fill="#0B1510" stroke="#2DD47E" stroke-width="2" />
-            {/* Right Torch Flame */}
-            <path d="M 120 95 Q 105 75 120 50 Q 135 75 120 95 Z" fill="url(#tiki-orange-grad)" filter="drop-shadow(0 0 6px #F97316)" />
-          </g>
-
-          <!-- Main Polynesian Tiki Mask -->
-          <g id="tiki-mask">
-            {/* Mask Base Shield */}
-            <path 
-              d="M 70 70 C 70 70 65 145 100 165 C 135 145 130 70 130 70 Z" 
-              fill="#050807" 
-              stroke="url(#tiki-palm-grad)" 
-              stroke-width="5" 
-              stroke-linejoin="round"
-            />
-
-            {/* Forehead Carvings (Tiki crown style) */}
-            <path d="M 80 82 L 100 92 L 120 82" fill="none" stroke="url(#tiki-palm-grad)" stroke-width="3" stroke-linecap="round" />
-            <path d="M 80 90 L 100 100 L 120 90" fill="none" stroke="url(#tiki-orange-grad)" stroke-width="3" stroke-linecap="round" />
-
-            {/* Angry Brows */}
-            <path d="M 74 98 L 94 106" stroke="#F97316" stroke-width="4.5" stroke-linecap="round" />
-            <path d="M 126 98 L 106 106" stroke="#F97316" stroke-width="4.5" stroke-linecap="round" />
-
-            {/* Glowing Eyes */}
-            <ellipse cx="85" cy="110" rx="8" ry="5" fill="#2DD47E" filter="drop-shadow(0 0 4px #2DD47E)" />
-            <ellipse cx="115" cy="110" rx="8" ry="5" fill="#2DD47E" filter="drop-shadow(0 0 4px #2DD47E)" />
-
-            {/* Nose */}
-            <path 
-              d="M 96 108 H 104 L 104 128 H 110 L 100 138 L 90 128 H 96 Z" 
-              fill="url(#tiki-orange-grad)" 
-              stroke="#050807" 
-              stroke-width="1.5" 
-            />
-
-            {/* Grinning Mouth with blocky teeth */}
-            <path 
-              d="M 80 144 Q 100 156 120 144 Q 100 138 80 144 Z" 
-              fill="#050807" 
-              stroke="url(#tiki-palm-grad)" 
-              stroke-width="3.5" 
-              stroke-linejoin="round"
-            />
-            {/* Teeth Grid */}
-            <path d="M 88 144 V 148 M 94 145 V 149 M 100 146 V 150 M 106 145 V 149 M 112 144 V 148" stroke="#FACC15" stroke-width="2" stroke-linecap="round" />
-          </g>
-
-          {/* Tropical Cocktail Accent (Bottom Right overlap) */}
-          <g transform="translate(118, 134) scale(0.9)">
-            {/* Coconut Cup */}
-            <path d="M 5 15 C 5 45 45 45 45 15 Z" fill="#123D2C" stroke="#2DD47E" stroke-width="3.5" />
-            {/* Liquid inside Coconut */}
-            <path d="M 6 16 H 44 C 44 16 40 25 25 25 C 10 25 6 16 6 16 Z" fill="url(#tiki-orange-grad)" />
-            {/* Straw */}
-            <line x1="32" y1="20" x2="48" y2="-5" stroke="#FACC15" stroke-width="4" stroke-linecap="round" />
-            {/* Lime Wheel */}
-            <circle cx="10" cy="12" r="8" fill="#2DD47E" stroke="#A7F3D0" stroke-width="1.5" />
-            <circle cx="10" cy="12" r="5" fill="#123D2C" />
-            <line x1="10" y1="4" x2="10" y2="20" stroke="#2DD47E" stroke-width="1" />
-            <line x1="2" y1="12" x2="18" y2="12" stroke="#2DD47E" stroke-width="1" />
-            {/* Cocktail Umbrella */}
-            <path d="M 18 10 L 8 -15 L 28 -10 Z" fill="#F97316" stroke="#FACC15" stroke-width="1.5" stroke-linejoin="round" />
-            <line x1="18" y1="10" x2="15" y2="0" stroke="#FACC15" stroke-width="2.5" />
-          </g>
-        </svg>
-      </div>
-
-      {/* Typography portion of Logo */}
-      {variant === 'full' && (
-        <div class="flex flex-col justify-center select-none leading-none">
-          <span class="text-xl md:text-2xl font-black tracking-tight text-white font-display uppercase">
-            Tiki House
-          </span>
-          <div class="flex items-center space-x-1.5 mt-0.5">
-            <span class="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-tiki-palm uppercase">
-              Costa Rica
-            </span>
-            <span class="text-[8px] font-extrabold px-1.5 py-0.5 rounded bg-tiki-forest/60 text-tiki-soft border border-tiki-palm/20 uppercase tracking-widest leading-none">
-              CR
-            </span>
-          </div>
-        </div>
-      )}
+  <!--
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  LOGO DE TIKI HOUSE                                         ║
+    ║  Subir la imagen del logo a: /public/images/logo-tiki-house.png  ║
+    ║  Formatos aceptados: .png, .svg, .webp                     ║
+    ║  Tamaño recomendado: mínimo 400x400px para buena calidad   ║
+    ╚══════════════════════════════════════════════════════════════╝
+  -->
+  <div class="flex items-center space-x-3 md:space-x-4">
+    <!-- Imagen del Logo -->
+    <div 
+      class="relative flex-shrink-0"
+      style={{ 
+        width: width ? `${width}px` : '48px', 
+        height: height ? `${height}px` : '48px' 
+      }}
+    >
+      <img
+        src="/images/logo-tiki-house.png"
+        alt="Tiki House CR Logo"
+        width={width}
+        height={height}
+        class="w-full h-full object-contain drop-shadow-[0_4px_12px_rgba(0,177,137,0.25)]"
+        loading="eager"
+      />
     </div>
-  )}
+
+    {/* Typography portion of Logo */}
+    {variant === 'full' && (
+      <div class="flex flex-col justify-center select-none leading-none">
+        <span class="text-xl md:text-2xl font-black tracking-tight text-white font-display uppercase">
+          Tiki House
+        </span>
+        <div class="flex items-center space-x-1.5 mt-0.5">
+          <span class="text-[9px] md:text-[10px] font-bold tracking-[0.2em] text-tiki-primary uppercase">
+            Costa Rica
+          </span>
+          <span class="text-[8px] font-extrabold px-1.5 py-0.5 rounded bg-tiki-secondary/60 text-tiki-text border border-tiki-primary/20 uppercase tracking-widest leading-none">
+            CR
+          </span>
+        </div>
+      </div>
+    )}
+  </div>
 </div>

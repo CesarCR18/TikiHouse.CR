@@ -3,36 +3,36 @@ import { PACKAGES } from '../data/packages';
 import PackageCard from './PackageCard.astro';
 ---
 
-<section id="paquetes" class="py-24 px-4 md:px-8 relative bg-[#0B1510] overflow-hidden">
-  <!-- Glowing neon shapes behind cards -->
-  <div class="absolute top-1/4 right-[10%] w-96 h-96 bg-tiki-palm/5 rounded-full blur-[150px] pointer-events-none -z-10 animate-pulse"></div>
-  <div class="absolute bottom-1/4 left-[10%] w-96 h-96 bg-tiki-orange/5 rounded-full blur-[150px] pointer-events-none -z-10 animate-pulse"></div>
+<section id="paquetes" class="py-24 px-4 md:px-8 relative bg-tiki-bg-alt overflow-hidden">
+  <!-- Glowing neon shapes behind cards (colores oficiales) -->
+  <div class="absolute top-1/4 right-[10%] w-96 h-96 bg-tiki-primary/5 rounded-full blur-[150px] pointer-events-none -z-10 animate-pulse"></div>
+  <div class="absolute bottom-1/4 left-[10%] w-96 h-96 bg-tiki-accent/5 rounded-full blur-[150px] pointer-events-none -z-10 animate-pulse"></div>
 
   <div class="max-w-7xl mx-auto relative z-10">
     <!-- Header -->
     <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-      <span class="text-xs font-extrabold uppercase tracking-widest text-tiki-orange bg-tiki-orange/15 border border-tiki-orange/20 px-3.5 py-1 rounded-full">
+      <span class="text-xs font-extrabold uppercase tracking-widest text-tiki-accent bg-tiki-accent/15 border border-tiki-accent/20 px-3.5 py-1 rounded-full">
         Servicio Todo Incluido
       </span>
-      <h2 class="text-4xl md:text-5xl font-extrabold text-tiki-textMain tracking-tight">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-tiki-text tracking-tight">
         Paquetes para Eventos
       </h2>
-      <p class="text-base md:text-lg text-tiki-textSec font-normal leading-relaxed">
+      <p class="text-base md:text-lg text-tiki-text-sec font-normal leading-relaxed">
         Elige la experiencia ideal para tus invitados. Nos encargamos del montaje de barras móviles, bartenders, insumos, cristalería y hielo.
       </p>
     </div>
 
     <!-- Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
       {PACKAGES.map((pkg) => (
         <PackageCard pkg={pkg} />
       ))}
     </div>
 
     <!-- Custom Info Footnote -->
-    <div class="mt-16 text-center bg-tiki-dark/40 border border-tiki-palm/15 max-w-2xl mx-auto p-6 rounded-2xl">
-      <p class="text-sm text-tiki-textSec">
-        <strong class="text-tiki-palm">¿Tienes un evento a medida?</strong> Ofrecemos personalización total en tipos de licores, barras de mayores dimensiones, cocteles de bienvenida especiales y marcas de cerveza específicas. ¡Cuéntanos tu idea!
+    <div class="mt-16 text-center bg-tiki-bg/40 border border-tiki-primary/15 max-w-2xl mx-auto p-6 rounded-2xl">
+      <p class="text-sm text-tiki-text-sec">
+        <strong class="text-tiki-primary">¿Tienes un evento a medida?</strong> Ofrecemos personalización total en tipos de licores, barras de mayores dimensiones, cocteles de bienvenida especiales y marcas de cerveza específicas. ¡Cuéntanos tu idea!
       </p>
     </div>
   </div>
