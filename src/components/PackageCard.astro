@@ -1,0 +1,105 @@
+---
+import type { Package } from '../data/packages';
+
+interface Props {
+  pkg: Package;
+}
+
+const { pkg } = Astro.props;
+
+const isPopular = pkg.badge === 'Popular';
+const isFeatured = pkg.badge === 'Destacado';
+const isPremium = pkg.badge?.includes('Premium');
+---
+
+<div class={`relative rounded-3xl p-8 flex flex-col justify-between h-full transition-all duration-300 group hover:-translate-y-1.5 backdrop-blur-sm ${
+  isPopular 
+    ? 'bg-gradient-to-b from-tiki-card via-tiki-card to-tiki-forest/30 border-tiki-palm/40 shadow-[0_0_30px_rgba(45,212,126,0.05)] border-2' 
+    : isFeatured
+    ? 'bg-gradient-to-b from-tiki-card via-tiki-card to-tiki-forest/30 border-tiki-yellow/40 shadow-[0_0_30px_rgba(250,204,21,0.05)] border-2'
+    : isPremium
+    ? 'bg-gradient-to-b from-tiki-card via-tiki-card to-tiki-forest/30 border-tiki-orange/40 shadow-[0_0_30px_rgba(249,115,22,0.05)] border-2'
+    : 'bg-tiki-card border-tiki-soft/10 border'
+}`}>
+  <!-- Package Badge -->
+  {pkg.badge && (
+    <span class={`absolute -top-3.5 right-6 text-[10px] font-extrabold tracking-widest uppercase px-3 py-1 rounded-full border ${
+      isPopular 
+        ? 'bg-tiki-palm text-tiki-dark border-tiki-palm shadow-[0_0_10px_rgba(45,212,126,0.3)]' 
+        : isFeatured
+        ? 'bg-tiki-yellow text-tiki-dark border-tiki-yellow shadow-[0_0_10px_rgba(250,204,21,0.3)]'
+        : isPremium
+        ? 'bg-tiki-orange text-tiki-textMain border-tiki-orange shadow-[0_0_10px_rgba(249,115,22,0.3)]'
+        : 'bg-tiki-dark text-tiki-textSec border-tiki-soft/20'
+    }`}>
+      {pkg.badge}
+    </span>
+  )}
+
+  <div>
+    <!-- Title & Description -->
+    <h3 class="text-2xl font-bold text-tiki-textMain mb-2 group-hover:text-tiki-palm transition-colors duration-300">
+      {pkg.name}
+    </h3>
+    <p class="text-sm text-tiki-textSec font-normal leading-relaxed mb-6">
+      {pkg.description}
+    </p>
+
+    <!-- Key Metrics Grid -->
+    <div class="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-tiki-dark/60 border border-white/5 mb-6">
+      <div class="space-y-1">
+        <span class="text-[10px] font-bold text-tiki-textSec/60 uppercase tracking-wider">Invitados</span>
+        <p class="text-sm font-semibold text-tiki-textMain">{pkg.suggestedGuests}</p>
+      </div>
+      <div class="space-y-1">
+        <span class="text-[10px] font-bold text-tiki-textSec/60 uppercase tracking-wider">Servicio</span>
+        <p class="text-sm font-semibold text-tiki-textMain">{pkg.hoursOfService} Horas</p>
+      </div>
+      <div class="space-y-1">
+        <span class="text-[10px] font-bold text-tiki-textSec/60 uppercase tracking-wider">Personal</span>
+        <p class="text-sm font-semibold text-tiki-textMain">{pkg.bartendersCount} Bartender{pkg.bartendersCount > 1 ? 's' : ''}</p>
+      </div>
+      <div class="space-y-1">
+        <span class="text-[10px] font-bold text-tiki-textSec/60 uppercase tracking-wider">Cocteles</span>
+        <p class="text-sm font-semibold text-tiki-textMain">{pkg.cocktailsIncludedCount} Tipos</p>
+      </div>
+    </div>
+
+    <!-- Included Beverages Details -->
+    <div class="mb-6 py-2 px-3 border-l-2 border-tiki-palm/30 bg-tiki-palm/5 rounded-r-xl">
+      <p class="text-xs font-semibold text-tiki-palm uppercase tracking-wide mb-0.5">Bebidas Incluidas</p>
+      <p class="text-xs text-tiki-textSec leading-normal">{pkg.cocktailsDescription}</p>
+    </div>
+
+    <!-- Features Checklist -->
+    <div class="space-y-3.5 mb-8">
+      <p class="text-xs font-bold text-tiki-textMain uppercase tracking-widest">Servicio incluye:</p>
+      <ul class="space-y-2.5">
+        {pkg.features.map((feature) => (
+          <li class="flex items-start space-x-2.5 text-xs text-tiki-textSec font-normal">
+            <svg class="w-4 h-4 text-tiki-palm flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="leading-relaxed">{feature}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Booking CTA -->
+  <button 
+    data-package-name={pkg.name}
+    class={`booking-btn w-full py-4 rounded-xl font-bold text-center tracking-wide transition-all duration-300 cursor-pointer ${
+      isPopular 
+        ? 'bg-tiki-palm text-tiki-dark hover:bg-tiki-palm/90 shadow-[0_0_20px_rgba(45,212,126,0.2)] hover:shadow-[0_0_30px_rgba(45,212,126,0.4)]'
+        : isFeatured
+        ? 'bg-tiki-yellow text-tiki-dark hover:bg-tiki-yellow/90 shadow-[0_0_20px_rgba(250,204,21,0.2)] hover:shadow-[0_0_30px_rgba(250,204,21,0.4)]'
+        : isPremium
+        ? 'bg-tiki-orange text-tiki-textMain hover:bg-tiki-orange/90 shadow-[0_0_20px_rgba(249,115,22,0.2)] hover:shadow-[0_0_30px_rgba(249,115,22,0.4)]'
+        : 'bg-tiki-dark border border-tiki-soft/20 text-tiki-textMain hover:bg-tiki-soft/10 hover:border-tiki-palm/45'
+    }`}
+  >
+    Cotizar este paquete
+  </button>
+</div>

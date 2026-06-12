@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Cocktails from '../components/Cocktails.astro';
+import Packages from '../components/Packages.astro';
+import About from '../components/About.astro';
+import Gallery from '../components/Gallery.astro';
+import Testimonials from '../components/Testimonials.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+	title="Tiki House Costa Rica | Coctelería Tropical y Barra Móvil para Eventos"
+	description="Lleva la mejor barra libre de coctelería exótica y tiki a tu evento en Costa Rica. Cocteles premium, bartenders uniformados y barras móviles temáticas para bodas, cumpleaños y eventos corporativos."
+>
+	<!-- Sticky Header -->
+	<Navbar />
+
+	<!-- Main Page Flow -->
+	<main class="flex-grow">
+		<!-- Hero Section -->
+		<Hero />
+
+		<!-- Cocktails Catalog -->
+		<Cocktails />
+
+		<!-- Event Service Packages -->
+		<Packages />
+
+		<!-- Brand Identity / About Us -->
+		<About />
+
+		<!-- Event Bento Gallery -->
+		<Gallery />
+
+		<!-- Client Reviews -->
+		<Testimonials />
+
+		<!-- Event Booking Form -->
+		<ContactForm />
+	</main>
+
+	<!-- Footer Section -->
+	<Footer />
+</Layout>

@@ -1,0 +1,121 @@
+---
+---
+<header class="fixed top-0 left-0 w-full z-50 px-4 py-4 md:px-8">
+  <nav class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 rounded-2xl glassmorphism transition-all duration-300">
+    <!-- Logo -->
+    <a href="#inicio" class="flex items-center space-x-2 group">
+      <span class="text-2xl md:text-3xl font-extrabold tracking-tighter text-gradient-palm-yellow">
+        TIKI HOUSE
+      </span>
+      <span class="text-xs font-semibold px-2 py-0.5 rounded bg-tiki-forest text-tiki-palm border border-tiki-palm/20 uppercase tracking-widest hidden sm:inline-block">
+        CR
+      </span>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <div class="hidden md:flex items-center space-x-8">
+      <a href="#inicio" class="text-sm font-medium text-tiki-textSec hover:text-tiki-palm transition-colors duration-200">Inicio</a>
+      <a href="#cocteles" class="text-sm font-medium text-tiki-textSec hover:text-tiki-palm transition-colors duration-200">Cocteles</a>
+      <a href="#paquetes" class="text-sm font-medium text-tiki-textSec hover:text-tiki-palm transition-colors duration-200">Paquetes</a>
+      <a href="#sobre-nosotros" class="text-sm font-medium text-tiki-textSec hover:text-tiki-palm transition-colors duration-200">Sobre Nosotros</a>
+      <a href="#galeria" class="text-sm font-medium text-tiki-textSec hover:text-tiki-palm transition-colors duration-200">Galería</a>
+      <a href="#testimonios" class="text-sm font-medium text-tiki-textSec hover:text-tiki-palm transition-colors duration-200">Opiniones</a>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="hidden md:block">
+      <a 
+        href="#contacto" 
+        class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-tiki-palm hover:bg-tiki-palm/90 text-tiki-dark font-bold text-sm tracking-wide shadow-[0_0_15px_rgba(45,212,126,0.3)] hover:shadow-[0_0_25px_rgba(45,212,126,0.5)] transition-all duration-300 transform hover:-translate-y-0.5"
+      >
+        Cotizar Evento
+      </a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button 
+      id="mobile-menu-toggle"
+      class="md:hidden flex flex-col justify-between w-6 h-4 text-tiki-textMain focus:outline-none group"
+      aria-label="Abrir menú"
+    >
+      <span class="w-full h-0.5 bg-current rounded transition-all duration-300 origin-left" id="bar1"></span>
+      <span class="w-full h-0.5 bg-current rounded transition-all duration-300" id="bar2"></span>
+      <span class="w-full h-0.5 bg-current rounded transition-all duration-300 origin-left" id="bar3"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Dropdown Menu -->
+  <div 
+    id="mobile-menu"
+    class="absolute top-20 left-4 right-4 py-6 px-6 rounded-2xl glassmorphism flex flex-col space-y-4 opacity-0 scale-95 pointer-events-none transition-all duration-350 z-40"
+  >
+    <a href="#inicio" class="mobile-link text-base font-semibold text-tiki-textSec hover:text-tiki-palm py-2 border-b border-tiki-palm/5">Inicio</a>
+    <a href="#cocteles" class="mobile-link text-base font-semibold text-tiki-textSec hover:text-tiki-palm py-2 border-b border-tiki-palm/5">Cocteles</a>
+    <a href="#paquetes" class="mobile-link text-base font-semibold text-tiki-textSec hover:text-tiki-palm py-2 border-b border-tiki-palm/5">Paquetes</a>
+    <a href="#sobre-nosotros" class="mobile-link text-base font-semibold text-tiki-textSec hover:text-tiki-palm py-2 border-b border-tiki-palm/5">Sobre Nosotros</a>
+    <a href="#galeria" class="mobile-link text-base font-semibold text-tiki-textSec hover:text-tiki-palm py-2 border-b border-tiki-palm/5">Galería</a>
+    <a href="#testimonios" class="mobile-link text-base font-semibold text-tiki-textSec hover:text-tiki-palm py-2 border-b border-tiki-palm/5">Opiniones</a>
+    
+    <a 
+      href="#contacto" 
+      class="mobile-link w-full py-3 rounded-xl bg-tiki-palm text-tiki-dark font-bold text-center shadow-[0_0_15px_rgba(45,212,126,0.3)] block"
+    >
+      Cotizar Evento
+    </a>
+  </div>
+</header>
+
+<script>
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const bar1 = document.getElementById('bar1');
+  const bar2 = document.getElementById('bar2');
+  const bar3 = document.getElementById('bar3');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  let isOpen = false;
+
+  function toggleMenu() {
+    isOpen = !isOpen;
+    if (isOpen) {
+      // Show menu
+      mobileMenu?.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+      mobileMenu?.classList.add('opacity-100', 'scale-100');
+      
+      // Animate hamburger to X
+      bar1?.classList.add('rotate-45', 'translate-x-1', '-translate-y-0.5');
+      bar2?.classList.add('opacity-0');
+      bar3?.classList.add('-rotate-45', 'translate-x-1', 'translate-y-0.5');
+    } else {
+      // Hide menu
+      mobileMenu?.classList.remove('opacity-100', 'scale-100');
+      mobileMenu?.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+      
+      // Reset hamburger
+      bar1?.classList.remove('rotate-45', 'translate-x-1', '-translate-y-0.5');
+      bar2?.classList.remove('opacity-0');
+      bar3?.classList.remove('-rotate-45', 'translate-x-1', 'translate-y-0.5');
+    }
+  }
+
+  toggleBtn?.addEventListener('click', toggleMenu);
+
+  // Close menu on clicking link
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (isOpen) toggleMenu();
+    });
+  });
+
+  // Change nav background on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav?.classList.add('bg-tiki-dark/95', 'shadow-2xl', 'border-tiki-palm/20');
+      nav?.classList.remove('bg-tiki-card/70');
+    } else {
+      nav?.classList.remove('bg-tiki-dark/95', 'shadow-2xl', 'border-tiki-palm/20');
+      nav?.classList.add('bg-tiki-card/70');
+    }
+  });
+</script>

@@ -1,0 +1,73 @@
+---
+import { PACKAGES } from '../data/packages';
+import PackageCard from './PackageCard.astro';
+---
+
+<section id="paquetes" class="py-24 px-4 md:px-8 relative bg-[#0B1510] overflow-hidden">
+  <!-- Glowing neon shapes behind cards -->
+  <div class="absolute top-1/4 right-[10%] w-96 h-96 bg-tiki-palm/5 rounded-full blur-[150px] pointer-events-none -z-10 animate-pulse"></div>
+  <div class="absolute bottom-1/4 left-[10%] w-96 h-96 bg-tiki-orange/5 rounded-full blur-[150px] pointer-events-none -z-10 animate-pulse"></div>
+
+  <div class="max-w-7xl mx-auto relative z-10">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+      <span class="text-xs font-extrabold uppercase tracking-widest text-tiki-orange bg-tiki-orange/15 border border-tiki-orange/20 px-3.5 py-1 rounded-full">
+        Servicio Todo Incluido
+      </span>
+      <h2 class="text-4xl md:text-5xl font-extrabold text-tiki-textMain tracking-tight">
+        Paquetes para Eventos
+      </h2>
+      <p class="text-base md:text-lg text-tiki-textSec font-normal leading-relaxed">
+        Elige la experiencia ideal para tus invitados. Nos encargamos del montaje de barras móviles, bartenders, insumos, cristalería y hielo.
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+      {PACKAGES.map((pkg) => (
+        <PackageCard pkg={pkg} />
+      ))}
+    </div>
+
+    <!-- Custom Info Footnote -->
+    <div class="mt-16 text-center bg-tiki-dark/40 border border-tiki-palm/15 max-w-2xl mx-auto p-6 rounded-2xl">
+      <p class="text-sm text-tiki-textSec">
+        <strong class="text-tiki-palm">¿Tienes un evento a medida?</strong> Ofrecemos personalización total en tipos de licores, barras de mayores dimensiones, cocteles de bienvenida especiales y marcas de cerveza específicas. ¡Cuéntanos tu idea!
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Script to auto-fill the contact form dropdown when a booking button is clicked
+  const bookingButtons = document.querySelectorAll('.booking-btn');
+
+  bookingButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const packageName = btn.getAttribute('data-package-name');
+      if (!packageName) return;
+
+      // Find the event type or package selection dropdown in the contact form
+      const selectElement = document.getElementById('tipo-evento') as HTMLSelectElement | null;
+      if (selectElement) {
+        // Find matching option and select it
+        for (let i = 0; i < selectElement.options.length; i++) {
+          const option = selectElement.options[i];
+          if (option.value.toLowerCase().includes(packageName.toLowerCase()) || 
+              option.text.toLowerCase().includes(packageName.toLowerCase())) {
+            selectElement.selectedIndex = i;
+            // Trigger change event if needed
+            selectElement.dispatchEvent(new Event('change'));
+            break;
+          }
+        }
+      }
+
+      // Smooth scroll to the contact form section
+      const contactSection = document.getElementById('contacto');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>

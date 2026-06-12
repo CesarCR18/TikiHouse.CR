@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --color-tiki-dark: #050807;
+  --color-tiki-card: #0B1510;
+  --color-tiki-forest: #123D2C;
+  --color-tiki-palm: #2DD47E;
+  --color-tiki-soft: #A7F3D0;
+  --color-tiki-yellow: #FACC15;
+  --color-tiki-orange: #F97316;
+  --color-tiki-text-main: #F8FAFC;
+  --color-tiki-text-sec: #CBD5E1;
+
+  --font-sans: "Outfit", sans-serif;
+  --font-display: "Syne", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #050807;
+  color: #F8FAFC;
+}
+
+/* Custom styles and utilities for nice visuals */
+.glassmorphism {
+  background: rgba(11, 21, 16, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(45, 212, 126, 0.1);
+}
+
+.glassmorphism-light {
+  background: rgba(11, 21, 16, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(248, 250, 252, 0.05);
+}
+
+.text-gradient-palm-yellow {
+  background: linear-gradient(135deg, #2DD47E 0%, #FACC15 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-orange-yellow {
+  background: linear-gradient(135deg, #F97316 0%, #FACC15 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

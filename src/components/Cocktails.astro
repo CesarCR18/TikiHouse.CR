@@ -1,0 +1,108 @@
+---
+import { COCKTAILS } from '../data/cocktails';
+import CocktailCard from './CocktailCard.astro';
+
+const categories = ['Todos', 'Clásicos', 'Especiales Tiki', 'Autóctonos & Shots'];
+---
+
+<section id="cocteles" class="py-24 px-4 md:px-8 relative bg-tiki-dark overflow-hidden">
+  <!-- Decorative background mesh -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-tiki-forest/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+
+  <div class="max-w-7xl mx-auto relative z-10">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+      <span class="text-xs font-extrabold uppercase tracking-widest text-tiki-palm bg-tiki-forest/30 border border-tiki-palm/20 px-3.5 py-1 rounded-full">
+        Sabores del Trópico
+      </span>
+      <h2 class="text-4xl md:text-5xl font-extrabold text-tiki-textMain tracking-tight">
+        Nuestra Carta de Coctelería
+      </h2>
+      <p class="text-base md:text-lg text-tiki-textSec font-normal leading-relaxed">
+        Bebidas exóticas y refrescantes preparadas al momento por profesionales, utilizando frutas costarricenses de temporada y destilados premium.
+      </p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
+      {categories.map((category) => (
+        <button
+          data-category={category}
+          class={`filter-btn px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide border transition-all duration-300 cursor-pointer ${
+            category === 'Todos'
+              ? 'bg-tiki-palm text-tiki-dark border-tiki-palm shadow-[0_0_15px_rgba(45,212,126,0.25)]'
+              : 'bg-tiki-card/85 text-tiki-textSec border-tiki-soft/10 hover:border-tiki-palm/45 hover:text-tiki-palm'
+          }`}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+
+    <!-- Cocktails Grid -->
+    <div 
+      id="cocktails-grid" 
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-500"
+    >
+      {COCKTAILS.map((cocktail) => (
+        <div 
+          class="cocktail-card-wrapper transition-all duration-500 transform scale-100 opacity-100"
+          data-drink-category={cocktail.category}
+        >
+          <CocktailCard cocktail={cocktail} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.cocktail-card-wrapper');
+  const grid = document.getElementById('cocktails-grid');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      // 1. Get selected category
+      const targetCategory = btn.getAttribute('data-category');
+      if (!targetCategory) return;
+
+      // 2. Update active button styles
+      buttons.forEach((b) => {
+        if (b === btn) {
+          b.classList.remove('bg-tiki-card/85', 'text-tiki-textSec', 'border-tiki-soft/10', 'hover:border-tiki-palm/45', 'hover:text-tiki-palm');
+          b.classList.add('bg-tiki-palm', 'text-tiki-dark', 'border-tiki-palm', 'shadow-[0_0_15px_rgba(45,212,126,0.25)]');
+        } else {
+          b.classList.add('bg-tiki-card/85', 'text-tiki-textSec', 'border-tiki-soft/10', 'hover:border-tiki-palm/45', 'hover:text-tiki-palm');
+          b.classList.remove('bg-tiki-palm', 'text-tiki-dark', 'border-tiki-palm', 'shadow-[0_0_15px_rgba(45,212,126,0.25)]');
+        }
+      });
+
+      // 3. Filter Cards with animations
+      grid?.classList.add('opacity-40');
+      
+      setTimeout(() => {
+        cards.forEach((card) => {
+          const wrapper = card as HTMLElement;
+          const cardCategory = wrapper.getAttribute('data-drink-category');
+          
+          if (targetCategory === 'Todos' || cardCategory === targetCategory) {
+            wrapper.style.display = 'block';
+            setTimeout(() => {
+              wrapper.style.opacity = '1';
+              wrapper.style.transform = 'scale(1)';
+            }, 50);
+          } else {
+            wrapper.style.opacity = '0';
+            wrapper.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+              wrapper.style.display = 'none';
+            }, 300);
+          }
+        });
+        
+        grid?.classList.remove('opacity-40');
+      }, 250);
+    });
+  });
+</script>
